@@ -7,7 +7,7 @@ print('datasets loaded')
 train_texts, train_labels = tr.TEXT.tolist(), tr.violate.tolist()
 val_texts, val_labels = dev.TEXT.tolist(), dev.violate.tolist()
 test_texts, test_labels = te.TEXT.tolist(), te.violate.tolist()
-
+ 
 del te, tr, dev 
 print('datasets deleted')
 from transformers import AutoTokenizer, AutoModel
