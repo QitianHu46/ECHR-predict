@@ -46,22 +46,22 @@ if do_data:
             # padding='max_length', max_length=512)
         val_dataset = IMDbDataset(val_encodings, test_labels)
         if save_data:
-            filehandler = open('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/datasets/'+save_file_name, 'wb') 
+            filehandler = open('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/datasets/'+save_file_name, 'wb') 
             pickle.dump(val_dataset, filehandler)
             print(save_file_name + ' dumped')
         return val_dataset
     
-    test_dataset = load_tokenize_save(data_path = '/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/ecthr-test.csv', save_file_name='test.pickle', save_data=save_data)
-    # train_dataset = load_tokenize_save(data_path = '/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/ecthr-train.csv', save_file_name='train.pickle', save_data=save_data)
-    val_dataset = load_tokenize_save(data_path = '/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/ecthr-dev.csv', save_file_name='dev.pickle', save_data=save_data)
+    test_dataset = load_tokenize_save(data_path = '/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/ecthr-test.csv', save_file_name='test.pickle', save_data=save_data)
+    # train_dataset = load_tokenize_save(data_path = '/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/ecthr-train.csv', save_file_name='train.pickle', save_data=save_data)
+    val_dataset = load_tokenize_save(data_path = '/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/ecthr-dev.csv', save_file_name='dev.pickle', save_data=save_data)
 
     print('dataset fin')
 else:
-    f = open('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/datasets/train.pickle', 'rb') 
+    f = open('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/datasets/train.pickle', 'rb') 
     train_dataset = pickle.load(f)
-    f = open('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/datasets/test.pickle', 'rb') 
+    f = open('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/datasets/test.pickle', 'rb') 
     test_dataset = pickle.load(f)
-    f = open('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/datasets/dev.pickle', 'rb') 
+    f = open('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/datasets/dev.pickle', 'rb') 
     val_dataset = pickle.load(f)
 
 ############################################################
@@ -109,13 +109,13 @@ if do_training:
     res = trainer.evaluate()
     print(res)
 
-    torch.save(model, '/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/saved_model/Longformer1')
+    torch.save(model, '/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/saved_model/Longformer1')
 
 
 #################################################
 if do_checking:
     from torch.utils.data import DataLoader
-    model = torch.load('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/saved_model/Longformer1')
+    model = torch.load('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/saved_model/Longformer1')
     train_loader = DataLoader(test_dataset, batch_size=2, shuffle=True)
     for epoch in range(3):
         for batch in tqdm.tqdm(train_loader):

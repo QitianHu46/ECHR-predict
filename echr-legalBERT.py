@@ -1,8 +1,8 @@
 import pandas as pd 
 
-te = pd.read_csv('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/ecthr-test.csv')
-tr = pd.read_csv('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/ecthr-train.csv')
-dev = pd.read_csv('/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/ecthr-dev.csv')
+te = pd.read_csv('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/ecthr-test.csv')
+tr = pd.read_csv('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/ecthr-train.csv')
+dev = pd.read_csv('/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/ecthr-dev.csv')
 print('datasets loaded')
 train_texts, train_labels = tr.TEXT.tolist(), tr.violate.tolist()
 val_texts, val_labels = dev.TEXT.tolist(), dev.violate.tolist()
@@ -84,4 +84,4 @@ trainer.train()
 print('第二次 evaluate !!')
 res = trainer.evaluate()
 print(res)
-torch.save(model, '/net/scratch/jasonhu/legal_dec-sum/ECHR_Dataset/saved_model/legalBERT1')
+torch.save(model, '/net/scratch/jasonhu/legal_dec-sum/Dataset_ECHR/saved_model/legalBERT1')
